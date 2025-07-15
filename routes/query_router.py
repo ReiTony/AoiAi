@@ -7,7 +7,7 @@ from typing import List, Optional
 
 from utils.sessions import ChatSession, get_chat_session
 from utils.llm_client import generate_response
-from utils.prompt_templates import fitness_instructor_prompt
+from utils.instructor_templates import fitness_instructor_prompt
 
 logger = logging.getLogger("instructor_chat")
 router = APIRouter()
