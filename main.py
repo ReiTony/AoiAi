@@ -3,7 +3,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from prometheus_fastapi_instrumentator import Instrumentator
 from contextlib import asynccontextmanager
-import uvicorn
 
 # ---- Global Logging Config ----
 logging.basicConfig(
@@ -14,7 +13,8 @@ logging.basicConfig(
 # App Imports
 from routes.authentication_route import router as auth_router
 from routes.chat_route import router as chat_router
-from routes.query_router import router as query_router
+from routes.instructor_route import router as query_router
+from routes.profession_route import router as profession_router
 
 
 @asynccontextmanager
@@ -44,7 +44,8 @@ Instrumentator().instrument(app).expose(app)
 # Routers
 app.include_router(auth_router, prefix="/api/auth", tags=["User Authentication"])
 app.include_router(chat_router, prefix="/api/chat", tags=["Chat History"])
-app.include_router(query_router, prefix="/api/query", tags=["Instructor AI Chat"])
+app.include_router(query_router, prefix="/api/instructor", tags=["Instructor AI Chat"])
+app.include_router(profession_router, prefix="/api/profession", tags=["Profession AI Chat"])
 
 # Health Endpoints
 @app.get("/")
@@ -55,6 +56,3 @@ async def root():
 async def health():
     return {"status": "healthy"}
 
-# Run the App
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=1234, log_level="info")
