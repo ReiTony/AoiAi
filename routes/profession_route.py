@@ -11,6 +11,10 @@ from utils.profession_template import (
     musician_prompt,
     athlete_prompt,
     scientist_prompt,
+    firefighter_prompt,
+    teacher_prompt,
+    chef_prompt,
+    police_officer_prompt,
     businessman_prompt,
 )
 
@@ -35,8 +39,13 @@ def profession_intent_prompt(user_message: str) -> str:
         "- pilot: anything about flying, planes, flight instructions\n"
         "- musician: music theory, instruments, performance, rhythm\n"
         "- athlete: workouts, training, sports, performance\n"
+        "- firefighter: fire safety, rescue operations, emergency response\n"
+        "- teacher: education, teaching methods, classroom management\n"
+        "- chef: cooking techniques, recipes, culinary arts\n"
+        "- police officer: law enforcement, traffic control, public safety\n"
         "- scientist: experiments, labs, data, analysis, biology, chemistry\n"
         "- businessman: meetings, presentations, strategy, leadership, workplace\n\n"
+        "IMPORTANT: respond with only the profession name in lowercase. Do not use bold font-weight\n\n"
         f"User Message: {user_message.strip()}\n"
         "Intent:"
     )
@@ -77,6 +86,14 @@ async def profession_chat(
         prompt = athlete_prompt(user_message)
     elif intent == "scientist":
         prompt = scientist_prompt(user_message)
+    elif intent == "firefighter":
+        prompt = firefighter_prompt(user_message)
+    elif intent == "teacher":
+        prompt = teacher_prompt(user_message) 
+    elif intent == "chef":
+        prompt = chef_prompt(user_message)
+    elif intent == "police officer":
+        prompt = police_officer_prompt(user_message)
     else:
         prompt = businessman_prompt(user_message)
 
